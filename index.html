@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)file:///C:/Users/AlexisLopezHernadez/Downloads/index_10.html -->
+<html lang="en" data-theme="dark"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProxiTrack</title>
+<link rel="stylesheet" href="./index_files/tabler-icons.min.css">
+<style>
+:root{--bg:#f5f5f7;--bg2:#fff;--bg3:#f0f0f5;--surface:#fff;--border:rgba(0,0,0,.09);--border2:rgba(0,0,0,.15);--text:#1a1a2e;--text2:#6b6b8a;--accent:#3b82f6;--accent-bg:#eff6ff;--accent-text:#1d4ed8;--success:#16a34a;--success-bg:#f0fdf4;--success-text:#15803d;--warn:#d97706;--danger:#dc2626;--danger-bg:#fef2f2;--danger-text:#b91c1c;--amber:#b45309;--amber-bg:#fffbeb;--amber-text:#92400e;--r:8px;--rl:12px;--mono:'SFMono-Regular',Consolas,monospace}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);min-height:100vh}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+button{cursor:pointer;font-family:inherit;font-size:13px;border:1px solid var(--border2);background:var(--bg2);color:var(--text);border-radius:var(--r);padding:6px 14px;transition:background .15s}
+button:hover{background:var(--bg3)}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+button.primary:hover{opacity:.88}
+button.danger{background:var(--danger-bg);color:var(--danger);border-color:var(--danger)}
+button.amber{background:var(--amber-bg);color:var(--amber);border-color:var(--amber)}
+button.sm{padding:3px 9px;font-size:11px}
+input,select,textarea{font-family:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--border2);border-radius:var(--r);background:var(--bg3);color:var(--text);outline:none;width:100%;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+input::placeholder,textarea::placeholder{color:var(--text2)}
+select option{background:var(--bg3);color:var(--text)}
+textarea{resize:vertical;min-height:64px}
+label{font-size:11px;color:var(--text2);display:block;margin-bottom:4px;font-weight:500;letter-spacing:.03em;text-transform:uppercase}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:1rem 1.25rem;margin-bottom:1rem}
+.card-title{font-size:13px;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.b-in{background:var(--success-bg);color:var(--success-text)}
+.b-out{background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
+.b-area{background:var(--accent-bg);color:var(--accent-text)}
+.b-live{background:var(--success-bg);color:var(--success-text)}
+.b-manual{background:var(--amber-bg);color:var(--amber-text)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.metric{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:1rem;text-align:center}
+.metric-val{font-size:24px;font-weight:700;margin-bottom:2px}
+.metric-lbl{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.top-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.25rem;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.logo{font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px;letter-spacing:-.02em}
+.logo-dot{width:9px;height:9px;border-radius:50%;background:var(--success)}
+.tab-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.25rem;display:flex;overflow-x:auto;scrollbar-width:none}
+.tab-nav::-webkit-scrollbar{display:none}
+.tab{padding:0 14px;height:44px;font-size:13px;font-weight:500;border:none;background:transparent;color:var(--text2);border-bottom:2px solid transparent;border-radius:0;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.tab.on{color:var(--accent);border-bottom-color:var(--accent);background:transparent}
+.tab:hover:not(.on){color:var(--text);background:transparent}
+.page{display:none;padding:1.25rem;max-width:1400px;margin:0 auto}
+.page.on{display:block}
+.tw{overflow-x:auto;border-radius:var(--rl);border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{padding:8px 12px;text-align:left;font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;background:var(--bg3);border-bottom:1px solid var(--border)}
+td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(0,0,0,.012)}
+.chip{font-size:11px;font-family:var(--mono);background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:2px 7px;color:var(--text2)}
+.av{width:30px;height:30px;border-radius:50%;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent-text);flex-shrink:0}
+.empty{text-align:center;padding:2.5rem 1rem;color:var(--text2);font-size:13px}
+.acc{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:1rem 1.25rem;margin-bottom:.75rem}
+.ach{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.75rem}
+.acn{font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.acv{font-size:24px;font-weight:700;color:var(--success)}
+.acs{font-size:11px;color:var(--text2);margin-top:2px;text-align:right}
+.ecr{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-top:1px solid var(--border);font-size:12px}
+.pb{height:4px;background:var(--bg3);border-radius:2px;margin-top:8px;overflow:hidden}
+.pbf{height:100%;border-radius:2px;background:var(--success)}
+.fc{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rl);padding:1rem}
+.fah{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.fe{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px}
+/* overlay/modal */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;align-items:center;justify-content:center;padding:1rem}
+.overlay.on{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--rl);padding:1.5rem;width:100%;max-width:520px;max-height:90vh;overflow-y:auto}
+.mft{display:flex;justify-content:flex-end;gap:8px;margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border)}
+/* PIN */
+#pin-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:400;align-items:center;justify-content:center}
+#pin-ov.on{display:flex}
+.pin-box{background:var(--surface);border:1px solid var(--border2);border-radius:var(--rl);padding:2rem;width:320px;text-align:center}
+.pin-dots{display:flex;justify-content:center;gap:12px;margin:1.25rem 0}
+.pd{width:14px;height:14px;border-radius:50%;background:var(--border2);transition:background .15s}
+.pd.f{background:var(--accent)}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem}
+.pb2{padding:14px;font-size:18px;font-weight:600;border-radius:var(--r);border:1px solid var(--border2);background:var(--bg3)}
+.pb2:hover{background:var(--bg2)}
+/* Station */
+#stn{display:none;position:fixed;inset:0;z-index:200;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;padding:1rem}
+#stn.on{display:flex}
+.sw{width:100%;max-width:480px}
+.san{font-size:30px;font-weight:800;text-align:center;margin-bottom:4px;letter-spacing:-.02em}
+.ssb{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:1.5rem;text-align:center;margin-bottom:1rem}
+#si{font-size:18px;text-align:center;letter-spacing:.08em;padding:12px}
+.sres{border-radius:var(--rl);padding:1.25rem;text-align:center;display:none;margin-top:1rem}
+.sres.show{display:block}
+.sres.ok{background:var(--success-bg);border:1px solid var(--success)}
+.sres.err{background:var(--danger-bg);border:1px solid var(--danger)}
+.srn{font-size:22px;font-weight:700;margin-bottom:4px}
+.srd{font-size:13px;color:var(--text2)}
+.srr{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;gap:8px}
+.srr:last-child{border-bottom:none}
+/* audit */
+.arow{padding:10px 0;border-bottom:1px solid var(--border)}
+.arow:last-child{border-bottom:none}
+.aa{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;margin-bottom:4px}
+.aa-add{background:var(--success-bg);color:var(--success-text)}
+.aa-edit{background:var(--amber-bg);color:var(--amber-text)}
+.aa-del{background:var(--danger-bg);color:var(--danger-text)}
+.cs{color:var(--success)}.ca{color:var(--accent)}.cw{color:var(--warn)}.cm{color:var(--text2)}.camb{color:var(--amber)}
+.fw6{font-weight:600}.fw7{font-weight:700}
+@media(max-width:640px){.g2,.g3,.g4{grid-template-columns:1fr}.page{padding:1rem}.top-bar{padding:0 1rem}#metrics{grid-template-columns:1fr 1fr!important}}@media(max-width:1024px){#metrics{grid-template-columns:repeat(3,1fr)!important}}
+@media print{.top-bar,.tab-nav,.no-print{display:none!important}.page{display:block!important;padding:0}body{background:#fff;color:#000}}
+
+[data-theme="dark"]{
+  --bg:#0f0f17;--bg2:#1a1a28;--bg3:#13131f;--surface:#1e1e2e;
+  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.14);
+  --text:#e8e8f8;--text2:#8888a8;
+  --accent:#60a5fa;--accent-bg:rgba(59,130,246,.12);--accent-text:#93c5fd;
+  --success:#4ade80;--success-bg:rgba(22,163,74,.12);--success-text:#86efac;
+  --warn:#fbbf24;--danger:#f87171;--danger-bg:rgba(220,38,38,.12);--danger-text:#fca5a5;
+  --amber:#fbbf24;--amber-bg:rgba(180,83,9,.15);--amber-text:#fcd34d;
+}
+[data-theme="light"]{
+  --bg:#f5f5f7;--bg2:#fff;--bg3:#f0f0f5;--surface:#fff;
+  --border:rgba(0,0,0,.09);--border2:rgba(0,0,0,.15);
+  --text:#1a1a2e;--text2:#6b6b8a;
+  --accent:#3b82f6;--accent-bg:#eff6ff;--accent-text:#1d4ed8;
+  --success:#16a34a;--success-bg:#f0fdf4;--success-text:#15803d;
+  --warn:#d97706;--danger:#dc2626;--danger-bg:#fef2f2;--danger-text:#b91c1c;
+  --amber:#b45309;--amber-bg:#fffbeb;--amber-text:#92400e;
+}
+</style>
+</head>
+<body>
+<header class="top-bar">
+  <div class="logo"><div class="logo-dot"></div> ProxiTrack</div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <span style="font-size:12px;color:var(--text2)" id="clk">09:26:54 AM</span>
+    <button id="dm-btn" onclick="toggleDM()" style="padding:6px 10px" title="Toggle dark/light mode"><i class="ti ti-sun" id="dm-icon"></i></button> <button class="amber no-print" onclick="reqPin(&#39;manual&#39;)"><i class="ti ti-pencil"></i> Manual Entry</button>
+    <button class="primary no-print" onclick="openStn()"><i class="ti ti-scan"></i> Station Mode</button>
+  </div>
+</header>
+<nav class="tab-nav no-print">
+  <button class="tab on" onclick="go(&#39;db&#39;)" id="t-db"><i class="ti ti-layout-dashboard"></i> Dashboard</button>
+  <button class="tab" onclick="go(&#39;cost&#39;)" id="t-cost"><i class="ti ti-coin"></i> Labor Cost</button>
+  <button class="tab" onclick="go(&#39;emp&#39;)" id="t-emp"><i class="ti ti-users"></i> Employees</button>
+  <button class="tab" onclick="go(&#39;areas&#39;)" id="t-areas"><i class="ti ti-building-factory-2"></i> Areas</button>
+  <button class="tab" onclick="go(&#39;log&#39;)" id="t-log"><i class="ti ti-list"></i> Movement Log</button>
+  <button class="tab" onclick="go(&#39;audit&#39;)" id="t-audit"><i class="ti ti-shield-check"></i> Audit Log</button>
+</nav>
+<main>
+
+<!-- DASHBOARD -->
+<div class="page on" id="pg-db">
+  <!-- date range filter -->
+  <div class="card" style="margin-bottom:1rem;padding:1rem 1.25rem">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div style="display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap">
+        <div style="min-width:160px"><label>From</label><input type="date" id="db-from" oninput="rDB()" style="width:160px"></div>
+        <div style="min-width:160px"><label>To</label><input type="date" id="db-to" oninput="rDB()" style="width:160px"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <button onclick="setDBRange(&#39;today&#39;)" id="drb-today" class="primary sm" style="padding:7px 20px;font-size:13px">Today</button>
+        <button onclick="setDBRange(&#39;week&#39;)" id="drb-week" style="padding:7px 20px;font-size:13px" class="sm">This week</button>
+        <button onclick="setDBRange(&#39;month&#39;)" id="drb-month" style="padding:7px 20px;font-size:13px" class="sm">This month</button>
+        <button onclick="setDBRange(&#39;clear&#39;)" style="padding:7px 20px;font-size:13px">Clear</button>
+      </div>
+    </div>
+  </div>
+  <!-- metrics row: 6 cards -->
+  <div id="metrics" style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:1.25rem">
+    <div class="metric"><div class="metric-val ca">1</div><div class="metric-lbl">On floor now</div></div>
+    <div class="metric"><div class="metric-val cs">1</div><div class="metric-lbl">Employees today</div></div>
+    <div class="metric"><div class="metric-val cw">$1.18</div><div class="metric-lbl">Running cost now</div></div>
+    <div class="metric"><div class="metric-val" style="font-size:18px">$1.18</div><div class="metric-lbl">2026-06-05 → 2026-06-05</div></div>
+    <div class="metric"><div class="metric-val" style="font-size:20px">$268.71</div><div class="metric-lbl">This week (Wed–Tue)</div></div>
+    <div class="metric"><div class="metric-val" style="font-size:20px">$268.71</div><div class="metric-lbl">This month</div></div></div>
+  <div class="g2" style="align-items:start">
+    <div class="card" style="margin-bottom:0"><div class="card-title"><i class="ti ti-map"></i> Live Floor</div><div id="floor" style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="fc"><div class="fah"><span>Line A</span><span class="badge b-area">0</span></div>
+      
+      <div style="font-size:12px;color:var(--text2);font-style:italic;padding:4px 0">Empty</div>
+    </div><div class="fc"><div class="fah"><span>Line B</span><span class="badge b-area">1</span></div>
+      <div style="font-size:12px;font-weight:700;color:var(--success);margin-bottom:6px">$1.18 running</div>
+      <div class="fe"><div class="av" style="width:22px;height:22px;font-size:10px">MG</div><span>Maria Garcia</span><span style="font-size:11px;color:var(--text2);margin-left:auto">09:23:00 AM</span></div>
+    </div><div class="fc"><div class="fah"><span>Packing</span><span class="badge b-area">0</span></div>
+      
+      <div style="font-size:12px;color:var(--text2);font-style:italic;padding:4px 0">Empty</div>
+    </div><div class="fc"><div class="fah"><span>Quality Control</span><span class="badge b-area">0</span></div>
+      
+      <div style="font-size:12px;color:var(--text2);font-style:italic;padding:4px 0">Empty</div>
+    </div></div></div>
+    <div class="card" style="margin-bottom:0"><div class="card-title"><i class="ti ti-history"></i> Recent Movements</div><div id="recent"><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px">
+    <div style="display:flex;align-items:center;gap:8px"><div class="av" style="width:24px;height:24px;font-size:10px">MG</div>
+      <div><div class="fw6">Maria Garcia</div><div style="font-size:11px;color:var(--text2)">09:23:00 AM</div></div>
+    </div>
+    <div style="text-align:right"><span class="badge b-area">Line B</span><span class="badge b-manual" style="margin-left:4px;font-size:10px">manual</span>
+      <div style="font-size:11px;color:var(--success);margin-top:2px">$1.18</div></div>
+  </div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px">
+    <div style="display:flex;align-items:center;gap:8px"><div class="av" style="width:24px;height:24px;font-size:10px">SR</div>
+      <div><div class="fw6">Sofia Reyes</div><div style="font-size:11px;color:var(--text2)">09:04:00 AM</div></div>
+    </div>
+    <div style="text-align:right"><span class="badge b-area">Line A</span><span class="badge b-manual" style="margin-left:4px;font-size:10px">manual</span>
+      <div style="font-size:11px;color:var(--success);margin-top:2px">$267.53</div></div>
+  </div></div></div>
+  </div>
+</div>
+
+<!-- LABOR COST -->
+<div class="page" id="pg-cost">
+  <div class="g4" style="margin-bottom:1.25rem" id="cmetrics"></div>
+  <div style="display:flex;gap:4px;margin-bottom:1.25rem;border-bottom:1px solid var(--border)">
+    <button class="tab on" onclick="ctab(&#39;live&#39;)" id="ct-live"><i class="ti ti-activity"></i> Active lines</button>
+    <button class="tab" onclick="ctab(&#39;hist&#39;)" id="ct-hist"><i class="ti ti-clock"></i> Completed</button>
+    <button class="tab" onclick="ctab(&#39;byemp&#39;)" id="ct-byemp"><i class="ti ti-user-dollar"></i> By employee</button>
+  </div>
+  <div id="c-live"></div><div id="c-hist" style="display:none"></div><div id="c-byemp" style="display:none"></div>
+</div>
+
+<!-- EMPLOYEES -->
+<div class="page" id="pg-emp">
+  <div class="card">
+    <div class="card-title">Add Employee</div>
+    <div class="g3" style="margin-bottom:12px">
+      <div><label>First name *</label><input id="ef" placeholder="Maria"></div>
+      <div><label>Last name *</label><input id="el" placeholder="Garcia"></div>
+      <div><label>Employee ID *</label><input id="ei" placeholder="EMP-0001"></div>
+    </div>
+    <div class="g4" style="margin-bottom:12px">
+      <div><label>Department</label><input id="ed" placeholder="Assembly"></div>
+      <div><label>Role</label><input id="er" placeholder="Line Operator"></div>
+      <div><label>Card # *</label><input id="ec" placeholder="Swipe card to capture"></div>
+      <div><label>Hourly Rate (USD) *</label><input id="erate" type="number" min="0" step="0.01" placeholder="18.50"></div>
+    </div>
+    <div style="display:flex;gap:8px"><button class="primary" onclick="saveEmp()"><i class="ti ti-plus"></i> Add</button><button onclick="clrEmp()">Clear</button></div>
+  </div>
+  <div class="card" style="padding:0">
+    <div style="padding:.75rem 1.25rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)">
+      <span class="fw6">Employee Registry</span>
+      <input id="esrch" placeholder="Search..." oninput="renderEmps()" style="width:180px">
+    </div>
+    <div class="tw" style="border:none;border-radius:0">
+      <table><thead><tr><th>Card #</th><th>Name</th><th>ID</th><th>Dept</th><th>Rate/hr</th><th>Status</th><th></th></tr></thead><tbody id="etb"><tr>
+    <td><span class="chip">0012345678</span></td>
+    <td><div style="display:flex;align-items:center;gap:8px"><div class="av">MG</div><span class="fw6">Maria Garcia</span></div></td>
+    <td><span class="chip">EMP-0001</span></td><td>Assembly</td>
+    <td class="fw6 cs">$18.50</td>
+    <td><span class="badge b-in">Active</span></td>
+    <td><div style="display:flex;gap:4px">
+      <button class="sm" onclick="togEmp(&#39;EMP-0001&#39;)">Deactivate</button>
+      <button class="sm danger" onclick="delEmp(&#39;EMP-0001&#39;)"><i class="ti ti-trash"></i></button>
+    </div></td>
+  </tr><tr>
+    <td><span class="chip">0023456789</span></td>
+    <td><div style="display:flex;align-items:center;gap:8px"><div class="av">JC</div><span class="fw6">James Chen</span></div></td>
+    <td><span class="chip">EMP-0002</span></td><td>Packing</td>
+    <td class="fw6 cs">$16.00</td>
+    <td><span class="badge b-in">Active</span></td>
+    <td><div style="display:flex;gap:4px">
+      <button class="sm" onclick="togEmp(&#39;EMP-0002&#39;)">Deactivate</button>
+      <button class="sm danger" onclick="delEmp(&#39;EMP-0002&#39;)"><i class="ti ti-trash"></i></button>
+    </div></td>
+  </tr><tr>
+    <td><span class="chip">0034567890</span></td>
+    <td><div style="display:flex;align-items:center;gap:8px"><div class="av">SR</div><span class="fw6">Sofia Reyes</span></div></td>
+    <td><span class="chip">EMP-0003</span></td><td>Quality</td>
+    <td class="fw6 cs">$21.75</td>
+    <td><span class="badge b-in">Active</span></td>
+    <td><div style="display:flex;gap:4px">
+      <button class="sm" onclick="togEmp(&#39;EMP-0003&#39;)">Deactivate</button>
+      <button class="sm danger" onclick="delEmp(&#39;EMP-0003&#39;)"><i class="ti ti-trash"></i></button>
+    </div></td>
+  </tr><tr>
+    <td><span class="chip">0045678901</span></td>
+    <td><div style="display:flex;align-items:center;gap:8px"><div class="av">LM</div><span class="fw6">Luca Moretti</span></div></td>
+    <td><span class="chip">EMP-0004</span></td><td>Assembly</td>
+    <td class="fw6 cs">$17.25</td>
+    <td><span class="badge b-in">Active</span></td>
+    <td><div style="display:flex;gap:4px">
+      <button class="sm" onclick="togEmp(&#39;EMP-0004&#39;)">Deactivate</button>
+      <button class="sm danger" onclick="delEmp(&#39;EMP-0004&#39;)"><i class="ti ti-trash"></i></button>
+    </div></td>
+  </tr></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- AREAS -->
+<div class="page" id="pg-areas">
+  <div class="card">
+    <div class="card-title">Add Area / Line</div>
+    <div class="g2" style="margin-bottom:12px">
+      <div><label>Area name *</label><input id="an" placeholder="Line A, Packing, QC..."></div>
+      <div><label>Short code</label><input id="ac" placeholder="L-A"></div>
+    </div>
+    <button class="primary" onclick="saveArea()"><i class="ti ti-plus"></i> Add Area</button>
+  </div>
+  <div class="card"><div class="card-title">Configured Areas</div><div id="alist"><div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+    <div style="display:flex;align-items:center;gap:10px"><i class="ti ti-building-factory-2" style="color:var(--text2)"></i><span class="fw6">Line A</span><span class="chip">L-A</span></div>
+    <button class="sm danger" onclick="rmArea(&#39;Line A&#39;)"><i class="ti ti-trash"></i> Remove</button>
+  </div><div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+    <div style="display:flex;align-items:center;gap:10px"><i class="ti ti-building-factory-2" style="color:var(--text2)"></i><span class="fw6">Line B</span><span class="chip">L-B</span></div>
+    <button class="sm danger" onclick="rmArea(&#39;Line B&#39;)"><i class="ti ti-trash"></i> Remove</button>
+  </div><div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+    <div style="display:flex;align-items:center;gap:10px"><i class="ti ti-building-factory-2" style="color:var(--text2)"></i><span class="fw6">Packing</span><span class="chip">PKG</span></div>
+    <button class="sm danger" onclick="rmArea(&#39;Packing&#39;)"><i class="ti ti-trash"></i> Remove</button>
+  </div><div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+    <div style="display:flex;align-items:center;gap:10px"><i class="ti ti-building-factory-2" style="color:var(--text2)"></i><span class="fw6">Quality Control</span><span class="chip">QC</span></div>
+    <button class="sm danger" onclick="rmArea(&#39;Quality Control&#39;)"><i class="ti ti-trash"></i> Remove</button>
+  </div></div></div>
+  <div class="card" style="padding:0">
+    <div style="padding:.75rem 1.25rem;border-bottom:1px solid var(--border)" class="fw6">Area Stats — Today</div>
+    <div class="tw" style="border:none;border-radius:0">
+      <table><thead><tr><th>Area</th><th>Code</th><th>Present</th><th>Swipes today</th><th>Cost today</th></tr></thead><tbody id="astb"><tr><td class="fw6">Line A</td><td><span class="chip">L-A</span></td><td>0</td><td>0</td><td class="fw6 cs">$0.00</td></tr><tr><td class="fw6">Line B</td><td><span class="chip">L-B</span></td><td>0</td><td>0</td><td class="fw6 cs">$0.00</td></tr><tr><td class="fw6">Packing</td><td><span class="chip">PKG</span></td><td>0</td><td>0</td><td class="fw6 cs">$0.00</td></tr><tr><td class="fw6">Quality Control</td><td><span class="chip">QC</span></td><td>0</td><td>0</td><td class="fw6 cs">$0.00</td></tr></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- MOVEMENT LOG -->
+<div class="page" id="pg-log">
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1rem;align-items:flex-end">
+    <div style="flex:1;min-width:140px"><label>Search</label><input id="fs" placeholder="Name or ID..." oninput="renderLog()"></div>
+    <div style="min-width:130px"><label>Area</label><select id="fa" onchange="renderLog()"><option value="">All areas</option><option value="Line A">Line A [L-A]</option><option value="Line B">Line B [L-B]</option><option value="Packing">Packing [PKG]</option><option value="Quality Control">Quality Control [QC]</option></select></div>
+    <div style="min-width:110px"><label>Date</label><input type="date" id="fd" oninput="renderLog()"></div>
+    <div style="display:flex;gap:6px;align-items:flex-end" class="no-print">
+      <button onclick="clrF()">Clear</button>
+      <button class="amber" onclick="reqPin(&#39;manual&#39;)"><i class="ti ti-pencil"></i> Manual Entry</button>
+      <button class="primary" onclick="expCSV()"><i class="ti ti-download"></i> CSV</button>
+    </div>
+  </div>
+  <div class="tw">
+    <table><thead><tr><th>#</th><th>Employee</th><th>ID</th><th>Area</th><th>Arrived</th><th>Left</th><th>Duration</th><th>Cost</th><th>Source</th><th></th></tr></thead>
+    <tbody id="ltb"><tr>
+      <td style="color:var(--text2);font-size:11px">2</td>
+      <td><div style="display:flex;align-items:center;gap:6px"><div class="av" style="width:22px;height:22px;font-size:10px">MG</div><span class="fw6">Maria Garcia</span></div></td>
+      <td><span class="chip">EMP-0001</span></td>
+      <td><span class="badge b-area">Line B</span></td>
+      <td style="font-size:12px">Jun 05, 2026 09:23:00 AM</td>
+      <td style="font-size:12px"><span style="color:var(--success)">Still here</span></td>
+      <td style="font-size:12px">—</td>
+      <td class="fw6 cs" style="font-size:12px">$0.20</td>
+      <td><span class="badge b-manual"><i class="ti ti-pencil" style="font-size:9px"></i> manual</span></td>
+      <td><div style="display:flex;gap:3px">
+        <button class="sm amber" onclick="editPunch(&#39;17806658191037jq5rx&#39;)" title="Edit"><i class="ti ti-pencil"></i></button>
+        <button class="sm danger" onclick="delPunchPin(&#39;17806658191037jq5rx&#39;)" title="Delete"><i class="ti ti-trash"></i></button>
+      </div></td>
+    </tr><tr>
+      <td style="color:var(--text2);font-size:11px">1</td>
+      <td><div style="display:flex;align-items:center;gap:6px"><div class="av" style="width:22px;height:22px;font-size:10px">SR</div><span class="fw6">Sofia Reyes</span></div></td>
+      <td><span class="chip">EMP-0003</span></td>
+      <td><span class="badge b-area">Line A</span></td>
+      <td style="font-size:12px">Jun 04, 2026 09:04:00 AM</td>
+      <td style="font-size:12px">09:22:00 PM</td>
+      <td style="font-size:12px">12h 18m</td>
+      <td class="fw6 cs" style="font-size:12px">$267.53</td>
+      <td><span class="badge b-manual"><i class="ti ti-pencil" style="font-size:9px"></i> manual</span></td>
+      <td><div style="display:flex;gap:3px">
+        <button class="sm amber" onclick="editPunch(&#39;1780665774781zn6w47&#39;)" title="Edit"><i class="ti ti-pencil"></i></button>
+        <button class="sm danger" onclick="delPunchPin(&#39;1780665774781zn6w47&#39;)" title="Delete"><i class="ti ti-trash"></i></button>
+      </div></td>
+    </tr></tbody></table>
+  </div>
+</div>
+
+<!-- AUDIT LOG -->
+<div class="page" id="pg-audit">
+  <div class="card" style="margin-bottom:1rem">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+      <div>
+        <div class="card-title" style="margin-bottom:4px"><i class="ti ti-shield-check"></i> Manual Edit Audit Log</div>
+        <div style="font-size:12px;color:var(--text2)">Every manual add, edit, or delete — who, when, and why.</div>
+      </div>
+      <button class="primary" onclick="expAudit()"><i class="ti ti-download"></i> Export CSV</button>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1rem;align-items:flex-end">
+    <div style="flex:1;min-width:140px"><label>Search</label><input id="afs" placeholder="Name, reason, editor..." oninput="renderAudit()"></div>
+    <div style="min-width:110px"><label>Action</label>
+      <select id="afa" onchange="renderAudit()"><option value="">All</option><option value="ADD">Add</option><option value="EDIT">Edit</option><option value="DELETE">Delete</option></select>
+    </div>
+    <div style="min-width:110px"><label>Date</label><input type="date" id="afd" oninput="renderAudit()"></div>
+    <button onclick="clrAF()" style="align-self:flex-end">Clear</button>
+  </div>
+  <div id="audit-wrap"></div>
+</div>
+
+</main>
+
+<!-- PIN OVERLAY -->
+<div id="pin-ov" class="">
+  <div class="pin-box">
+    <div style="font-size:16px;font-weight:700;margin-bottom:.4rem"><i class="ti ti-lock"></i> Manager PIN</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:.25rem">Enter 4-digit PIN to access manual entries</div>
+    <div class="pin-dots"><div class="pd" id="pd0"></div><div class="pd" id="pd1"></div><div class="pd" id="pd2"></div><div class="pd" id="pd3"></div></div>
+    <div id="perr" style="color:var(--danger);font-size:12px;min-height:18px;margin-bottom:.5rem"></div>
+    <div class="pgrid">
+      <button class="pb2" onclick="pp(&#39;1&#39;)">1</button><button class="pb2" onclick="pp(&#39;2&#39;)">2</button><button class="pb2" onclick="pp(&#39;3&#39;)">3</button>
+      <button class="pb2" onclick="pp(&#39;4&#39;)">4</button><button class="pb2" onclick="pp(&#39;5&#39;)">5</button><button class="pb2" onclick="pp(&#39;6&#39;)">6</button>
+      <button class="pb2" onclick="pp(&#39;7&#39;)">7</button><button class="pb2" onclick="pp(&#39;8&#39;)">8</button><button class="pb2" onclick="pp(&#39;9&#39;)">9</button>
+      <button class="pb2" onclick="pp(&#39;clr&#39;)" style="font-size:12px">CLR</button><button class="pb2" onclick="pp(&#39;0&#39;)">0</button><button class="pb2" onclick="pp(&#39;del&#39;)">⌫</button>
+    </div>
+    <button onclick="closePinOv()" style="width:100%;margin-top:4px">Cancel</button>
+    <div style="font-size:11px;color:var(--text2);margin-top:10px">Default PIN: <span style="font-family:var(--mono)">1234</span></div>
+  </div>
+</div>
+
+<!-- MANUAL ENTRY MODAL -->
+<div class="overlay" id="mm">
+  <div class="modal">
+    <div style="font-size:15px;font-weight:700;margin-bottom:1.25rem;display:flex;align-items:center;gap:8px" id="mm-title"><i class="ti ti-plus"></i> Add Manual Punch</div>
+    <input type="hidden" id="mm-eid" value="">
+    <div class="g2" style="margin-bottom:12px">
+      <div><label>Employee *</label><select id="mm-emp"><option value="">— select —</option><option value="EMP-0001">Maria Garcia (EMP-0001)</option><option value="EMP-0002">James Chen (EMP-0002)</option><option value="EMP-0003">Sofia Reyes (EMP-0003)</option><option value="EMP-0004">Luca Moretti (EMP-0004)</option></select></div>
+      <div><label>Area *</label><select id="mm-area"><option value="">— select area —</option><option value="Line A">Line A [L-A]</option><option value="Line B">Line B [L-B]</option><option value="Packing">Packing [PKG]</option><option value="Quality Control">Quality Control [QC]</option></select></div>
+    </div>
+    <div class="g2" style="margin-bottom:12px">
+      <div><label>Arrive date &amp; time *</label><input type="datetime-local" id="mm-arr"></div>
+      <div><label>Leave date &amp; time (blank = still present)</label><input type="datetime-local" id="mm-lv"></div>
+    </div>
+    <div style="margin-bottom:12px">
+      <label>Reason *</label>
+      <select id="mm-rsn">
+        <option value="">— select reason —</option>
+        <option>Forgot to swipe</option>
+        <option>Wrong area selected</option>
+        <option>Reader malfunction</option>
+        <option>Time correction</option>
+        <option>System error</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div style="margin-bottom:12px"><label>Notes (optional)</label><textarea id="mm-notes" placeholder="Additional details..."></textarea></div>
+    <div style="margin-bottom:12px"><label>Your name (manager) *</label><input id="mm-editor" placeholder="Manager name"></div>
+    <div id="mm-err" style="color:var(--danger);font-size:12px;min-height:16px;margin-bottom:8px"></div>
+    <div class="mft"><button onclick="closeMM()">Cancel</button><button class="amber" onclick="previewMM()"><i class="ti ti-eye"></i> Review &amp; Confirm</button></div>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="overlay" id="cm">
+  <div class="modal" style="max-width:420px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:8px"><i class="ti ti-shield-check"></i> Confirm Manual Entry</div>
+    <div id="cm-body" style="background:var(--bg3);border-radius:var(--r);padding:1rem;margin-bottom:1rem;font-size:13px;line-height:1.9">
+    <div><span style="color:var(--text2)">Action:</span> <b>Add new punch</b></div>
+    <div><span style="color:var(--text2)">Employee:</span> <b>Maria Garcia</b> <span class="chip">EMP-0001</span></div>
+    <div><span style="color:var(--text2)">Area:</span> <b>Line B</b></div>
+    <div><span style="color:var(--text2)">Arrive:</span> <b>Jun 05, 2026 09:23:00 AM</b></div>
+    <div><span style="color:var(--text2)">Leave:</span> <b>— (still present)</b></div>
+    
+    
+    <div><span style="color:var(--text2)">Reason:</span> <b>Forgot to swipe</b></div>
+    
+    <div><span style="color:var(--text2)">Edited by:</span> <b>Tersd</b></div>
+  </div>
+    <div style="font-size:12px;color:var(--amber);background:var(--amber-bg);border:1px solid var(--amber);border-radius:var(--r);padding:8px 12px;margin-bottom:1rem">
+      <i class="ti ti-alert-triangle"></i> This action will be recorded in the audit log.
+    </div>
+    <div class="mft">
+      <button onclick="backMM()"><i class="ti ti-arrow-left"></i> Go back</button>
+      <button class="primary" onclick="saveMM()"><i class="ti ti-check"></i> Confirm &amp; Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- STATION -->
+<div id="stn" role="dialog" aria-modal="true" class="">
+  <div class="sw">
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <div style="font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:6px">Station</div>
+      <div class="san" id="saname">No area selected</div>
+      <div style="font-size:13px;color:var(--text2);margin-top:4px" id="sstat">Select an area to activate</div>
+    </div>
+    <div style="margin-bottom:1rem"><label>Production area</label><select id="sasel" onchange="saChange()"><option value="">— select area —</option><option value="Line A">Line A [L-A]</option><option value="Line B">Line B [L-B]</option><option value="Packing">Packing [PKG]</option><option value="Quality Control">Quality Control [QC]</option></select></div>
+    <div class="ssb">
+      <div style="font-size:48px;color:var(--text2);margin-bottom:12px"><i class="ti ti-credit-card"></i></div>
+      <div style="font-size:13px;color:var(--text2);margin-bottom:.75rem">USB HID reader — tap field then swipe</div>
+      <input id="si" type="text" placeholder="Waiting for card swipe..." autocomplete="off" spellcheck="false">
+      <div style="font-size:11px;color:var(--text2);margin-top:6px">Auto-focuses every 3 s</div>
+    </div>
+    <div class="sres" id="sres"><div class="srn" id="srname"></div><div class="srd" id="srdet"></div></div>
+    <div class="card" style="margin-top:1rem;max-height:210px;overflow:auto">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text2);margin-bottom:8px">Recent at this station</div>
+      <div id="srec"><div style="color:var(--text2);font-size:12px">No activity yet.</div></div>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:1.25rem"><button onclick="closeStn()" class="danger"><i class="ti ti-x"></i> Exit station mode</button></div>
+  </div>
+</div>
+
+<script>
+// ── Dark mode ──
+(function(){
+  const dm=localStorage.getItem('px_dm');
+  if(dm==='dark'){document.documentElement.setAttribute('data-theme','dark');}
+  else if(dm==='light'){document.documentElement.setAttribute('data-theme','light');}
+  else{
+    // no preference saved — follow system
+    if(window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches){
+      document.documentElement.setAttribute('data-theme','dark');
+    } else {
+      document.documentElement.setAttribute('data-theme','light');
+    }
+  }
+})();
+
+const K={E:'px_e',A:'px_a',L:'px_l',AU:'px_au',PIN:'px_pin'};
+function ld(k){try{return JSON.parse(localStorage.getItem(k))||[];}catch{return[];}}
+function sv(k,d){localStorage.setItem(k,JSON.stringify(d));}
+let emps=ld(K.E),areas=ld(K.A),log=ld(K.L),al=ld(K.AU);
+let PIN=localStorage.getItem(K.PIN)||'1234';
+
+if(!emps.length){emps=[{id:'EMP-0001',first:'Maria',last:'Garcia',dept:'Assembly',role:'Line Operator',card:'0012345678',rate:18.5,active:true},{id:'EMP-0002',first:'James',last:'Chen',dept:'Packing',role:'Packer',card:'0023456789',rate:16,active:true},{id:'EMP-0003',first:'Sofia',last:'Reyes',dept:'Quality',role:'QC Inspector',card:'0034567890',rate:21.75,active:true},{id:'EMP-0004',first:'Luca',last:'Moretti',dept:'Assembly',role:'Line Operator',card:'0045678901',rate:17.25,active:true}];sv(K.E,emps);}
+if(!areas.length){areas=[{name:'Line A',code:'L-A'},{name:'Line B',code:'L-B'},{name:'Packing',code:'PKG'},{name:'Quality Control',code:'QC'}];sv(K.A,areas);}
+
+function ini(e){return(e.first[0]+e.last[0]).toUpperCase();}
+function ft(ts){return new Date(ts).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});}
+function fd(ts){return new Date(ts).toLocaleDateString('en-US',{month:'short',day:'2-digit',year:'numeric'});}
+function fi(ts){const d=new Date(ts);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function fdtl(ts){const d=new Date(ts);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+'T'+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
+function dur(ms){if(!ms||ms<0)return'—';const m=Math.round(ms/60000);if(m<1)return'<1m';if(m<60)return m+'m';return Math.floor(m/60)+'h '+(m%60)+'m';}
+function usd(n){return'$'+(Math.round(n*100)/100).toFixed(2);}
+function uid(){return Date.now()+Math.random().toString(36).substr(2,6);}
+function cost(l){const e=emps.find(x=>x.id===l.empId);if(!e||!e.rate)return 0;return Math.max(0,((l.leaveTs||Date.now())-l.arriveTs)/3600000*e.rate);}
+
+setInterval(()=>{document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});},1000);
+
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('pg-'+id).classList.add('on');
+  document.getElementById('t-'+id).classList.add('on');
+  if(id==='db')rDB();if(id==='cost')rCost();if(id==='emp')renderEmps();
+  if(id==='areas')renderAreas();if(id==='log')renderLog();if(id==='audit')renderAudit();
+}
+function rSels(){
+  ['fa','sasel','mm-area'].forEach(id=>{
+    const s=document.getElementById(id);if(!s)return;const c=s.value;
+    s.innerHTML=id==='fa'?'<option value="">All areas</option>':'<option value="">— select area —</option>';
+    areas.forEach(a=>{const o=document.createElement('option');o.value=a.name;o.textContent=a.name+(a.code?' ['+a.code+']':'');s.appendChild(o);});
+    if(c)s.value=c;
+  });
+  const me=document.getElementById('mm-emp');if(me){const c=me.value;me.innerHTML='<option value="">— select —</option>';emps.filter(e=>e.active).forEach(e=>{const o=document.createElement('option');o.value=e.id;o.textContent=e.first+' '+e.last+' ('+e.id+')';me.appendChild(o);});if(c)me.value=c;}
+}
+rSels();
+
+/* ── PIN ── */
+let pbuf='',pcb=null;
+function reqPin(action){pbuf='';pcb=action;updPD();document.getElementById('perr').textContent='';document.getElementById('pin-ov').classList.add('on');}
+function closePinOv(){document.getElementById('pin-ov').classList.remove('on');pbuf='';pcb=null;updPD();}
+function updPD(){for(let i=0;i<4;i++)document.getElementById('pd'+i).classList.toggle('f',i<pbuf.length);}
+function pp(v){
+  if(v==='clr'){pbuf='';updPD();document.getElementById('perr').textContent='';return;}
+  if(v==='del'){pbuf=pbuf.slice(0,-1);updPD();return;}
+  if(pbuf.length>=4)return;
+  pbuf+=v;updPD();
+  if(pbuf.length===4){
+    setTimeout(()=>{
+      if(pbuf===PIN){
+        const cb=pcb;closePinOv();
+        if(cb==='manual')openMM();
+        else if(cb&&cb.startsWith('edit:'))openMM(cb.split(':')[1]);
+        else if(cb&&cb.startsWith('del:'))doDelLog(cb.split(':')[1]);
+      } else {document.getElementById('perr').textContent='Incorrect PIN — try again';pbuf='';updPD();}
+    },150);
+  }
+}
+
+/* ── MANUAL MODAL ── */
+let editId=null;
+function openMM(logId){
+  rSels();editId=logId||null;
+  document.getElementById('mm-err').textContent='';
+  const t=document.getElementById('mm-title');
+  if(logId){
+    const l=log.find(x=>x.id===logId);if(!l)return;
+    t.innerHTML='<i class="ti ti-pencil"></i> Edit Punch';
+    document.getElementById('mm-eid').value=logId;
+    document.getElementById('mm-emp').value=l.empId;
+    document.getElementById('mm-area').value=l.area;
+    document.getElementById('mm-arr').value=fdtl(l.arriveTs);
+    document.getElementById('mm-lv').value=l.leaveTs?fdtl(l.leaveTs):'';
+    document.getElementById('mm-rsn').value='';
+    document.getElementById('mm-notes').value='';
+    document.getElementById('mm-editor').value='';
+  } else {
+    t.innerHTML='<i class="ti ti-plus"></i> Add Manual Punch';
+    document.getElementById('mm-eid').value='';
+    document.getElementById('mm-emp').value='';
+    document.getElementById('mm-area').value='';
+    document.getElementById('mm-arr').value=fdtl(Date.now());
+    document.getElementById('mm-lv').value='';
+    document.getElementById('mm-rsn').value='';
+    document.getElementById('mm-notes').value='';
+    document.getElementById('mm-editor').value='';
+  }
+  document.getElementById('mm').classList.add('on');
+}
+function closeMM(){document.getElementById('mm').classList.remove('on');editId=null;}
+function saveMM(){
+  const empId=document.getElementById('mm-emp').value;
+  const area=document.getElementById('mm-area').value;
+  const arrS=document.getElementById('mm-arr').value;
+  const lvS=document.getElementById('mm-lv').value;
+  const rsn=document.getElementById('mm-rsn').value;
+  const notes=document.getElementById('mm-notes').value.trim();
+  const editor=document.getElementById('mm-editor').value.trim();
+  const err=document.getElementById('mm-err');
+  if(!empId||!area||!arrS||!rsn||!editor){err.textContent='Please fill all required fields.';return;}
+  const arrTs=new Date(arrS).getTime();
+  const lvTs=lvS?new Date(lvS).getTime():null;
+  if(isNaN(arrTs)){err.textContent='Invalid arrive time.';return;}
+  if(lvTs&&lvTs<=arrTs){err.textContent='Leave time must be after arrive time.';return;}
+  const emp=emps.find(e=>e.id===empId);if(!emp){err.textContent='Employee not found.';return;}
+  const now=Date.now();
+  let action,before=null,after;
+  if(editId){
+    const idx=log.findIndex(l=>l.id===editId);if(idx===-1){err.textContent='Record not found.';return;}
+    before={...log[idx]};
+    log[idx]={...log[idx],empId,name:emp.first+' '+emp.last,area,arriveTs:arrTs,leaveTs:lvTs,manual:true,edited:true};
+    after={...log[idx]};action='EDIT';
+  } else {
+    const entry={id:uid(),empId,name:emp.first+' '+emp.last,area,arriveTs:arrTs,leaveTs:lvTs,manual:true,edited:false};
+    log.unshift(entry);after={...entry};action='ADD';
+  }
+  sv(K.L,log);
+  al.unshift({id:uid(),ts:now,action,empId,empName:emp.first+' '+emp.last,area,reason:rsn,notes,editor,before,after});
+  sv(K.AU,al);
+  closeMM();renderLog();rDB();
+}
+function editPunch(id){reqPin('edit:'+id);}
+function delPunchPin(id){reqPin('del:'+id);}
+function doDelLog(id){
+  const l=log.find(x=>x.id===id);if(!l)return;
+  const editor=prompt('Your name (for audit log):','');if(!editor)return;
+  const rsn=prompt('Reason for deletion (required):','');if(!rsn)return;
+  al.unshift({id:uid(),ts:Date.now(),action:'DELETE',empId:l.empId,empName:l.name,area:l.area,reason:rsn,notes:'',editor,before:{...l},after:null});
+  sv(K.AU,al);
+  log=log.filter(x=>x.id!==id);sv(K.L,log);
+  renderLog();rDB();
+}
+
+/* ── EMPLOYEES ── */
+function saveEmp(){
+  const f=document.getElementById('ef').value.trim(),l=document.getElementById('el').value.trim(),ei=document.getElementById('ei').value.trim();
+  const card=document.getElementById('ec').value.trim().replace(/\s/g,''),rate=parseFloat(document.getElementById('erate').value);
+  if(!f||!l||!ei||!card||isNaN(rate)){alert('All fields including hourly rate are required.');return;}
+  if(emps.find(e=>e.id===ei)){alert('ID already exists.');return;}
+  if(emps.find(e=>e.card===card)){alert('Card already assigned.');return;}
+  emps.push({id:ei,first:f,last:l,dept:document.getElementById('ed').value.trim(),role:document.getElementById('er').value.trim(),card,rate,active:true});
+  sv(K.E,emps);clrEmp();renderEmps();rSels();
+}
+function clrEmp(){['ef','el','ei','ed','er','ec','erate'].forEach(i=>document.getElementById(i).value='');}
+function togEmp(id){const e=emps.find(x=>x.id===id);if(e){e.active=!e.active;sv(K.E,emps);renderEmps();}}
+function delEmp(id){if(!confirm('Remove employee?'))return;emps=emps.filter(e=>e.id!==id);sv(K.E,emps);renderEmps();}
+function renderEmps(){
+  const q=(document.getElementById('esrch').value||'').toLowerCase();
+  const list=q?emps.filter(e=>(e.first+' '+e.last+' '+e.id+' '+e.card).toLowerCase().includes(q)):emps;
+  const tb=document.getElementById('etb');
+  if(!list.length){tb.innerHTML='<tr><td colspan="7"><div class="empty">No employees found.</div></td></tr>';return;}
+  tb.innerHTML=list.map(e=>`<tr>
+    <td><span class="chip">${e.card}</span></td>
+    <td><div style="display:flex;align-items:center;gap:8px"><div class="av">${ini(e)}</div><span class="fw6">${e.first} ${e.last}</span></div></td>
+    <td><span class="chip">${e.id}</span></td><td>${e.dept||'—'}</td>
+    <td class="fw6 cs">${usd(e.rate||0)}</td>
+    <td><span class="badge ${e.active?'b-in':'b-out'}">${e.active?'Active':'Inactive'}</span></td>
+    <td><div style="display:flex;gap:4px">
+      <button class="sm" onclick="togEmp('${e.id}')">${e.active?'Deactivate':'Activate'}</button>
+      <button class="sm danger" onclick="delEmp('${e.id}')"><i class="ti ti-trash"></i></button>
+    </div></td>
+  </tr>`).join('');
+}
+renderEmps();
+
+/* ── AREAS ── */
+function saveArea(){
+  const n=document.getElementById('an').value.trim(),c=document.getElementById('ac').value.trim();
+  if(!n){alert('Area name required.');return;}
+  if(areas.find(a=>a.name.toLowerCase()===n.toLowerCase())){alert('Area exists.');return;}
+  areas.push({name:n,code:c});sv(K.A,areas);
+  document.getElementById('an').value='';document.getElementById('ac').value='';
+  renderAreas();rSels();
+}
+function rmArea(n){if(!confirm('Remove area "'+n+'"?'))return;areas=areas.filter(a=>a.name!==n);sv(K.A,areas);renderAreas();rSels();}
+function renderAreas(){
+  const w=document.getElementById('alist');
+  if(!areas.length){w.innerHTML='<div class="empty">No areas yet.</div>';}
+  else w.innerHTML=areas.map(a=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+    <div style="display:flex;align-items:center;gap:10px"><i class="ti ti-building-factory-2" style="color:var(--text2)"></i><span class="fw6">${a.name}</span>${a.code?'<span class="chip">'+a.code+'</span>':''}</div>
+    <button class="sm danger" onclick="rmArea('${a.name}')"><i class="ti ti-trash"></i> Remove</button>
+  </div>`).join('');
+  const today=fi(Date.now()),pr=getPresent();
+  document.getElementById('astb').innerHTML=areas.map(a=>{
+    const tc=log.filter(l=>l.area===a.name&&fi(l.arriveTs)===today).reduce((s,l)=>s+cost(l),0);
+    return`<tr><td class="fw6">${a.name}</td><td><span class="chip">${a.code||'—'}</span></td><td>${pr.filter(p=>p.area===a.name).length}</td><td>${log.filter(l=>l.area===a.name&&fi(l.arriveTs)===today).length}</td><td class="fw6 cs">${usd(tc)}</td></tr>`;
+  }).join('');
+}
+renderAreas();
+
+/* ── MOVEMENT ── */
+function getPresent(){const s=new Set();return log.filter(l=>{if(!l.leaveTs&&!s.has(l.empId)){s.add(l.empId);return true;}return false;});}
+function swipe(card,area){
+  const c=card.replace(/[^0-9a-zA-Z]/g,'');
+  const emp=emps.find(e=>e.card.replace(/[^0-9a-zA-Z]/g,'')===c);
+  if(!emp)return{ok:false,msg:'Unknown card: '+card};
+  if(!emp.active)return{ok:false,msg:emp.first+' '+emp.last+' is inactive.'};
+  const now=Date.now();
+  const last=log.find(l=>l.empId===emp.id&&l.area===area&&!l.leaveTs);
+  if(last&&(now-last.arriveTs)<5000)return{ok:false,msg:'Duplicate swipe ignored.'};
+  let closed=null;
+  log.forEach(l=>{if(l.empId===emp.id&&!l.leaveTs){l.leaveTs=now;closed=l.area;}});
+  const entry={id:uid(),empId:emp.id,name:emp.first+' '+emp.last,area,arriveTs:now,leaveTs:null,manual:false};
+  log.unshift(entry);sv(K.L,log);
+  return{ok:true,emp,entry,closed};
+}
+
+/* ── DASHBOARD ── */
+function rDB(){
+  const today=fi(Date.now());
+  const {from,to}=getDBRange();
+  const useRange=from||to;
+  // filtered log for range
+  const rl=useRange?log.filter(l=>inRange(l.arriveTs,from,to)):log.filter(l=>fi(l.arriveTs)===today);
+  const tl=log.filter(l=>fi(l.arriveTs)===today);
+  const pr=getPresent();
+  const lc=pr.reduce((s,l)=>s+cost(l),0);
+  const tc=tl.reduce((s,l)=>s+cost(l),0);
+  const rc=rl.reduce((s,l)=>s+cost(l),0);
+  // week (Wed-Tue)
+  const now2=new Date();const day=now2.getDay();const diffW=((day-3)+7)%7;
+  const wed=new Date(now2);wed.setDate(now2.getDate()-diffW);
+  const wc=log.filter(l=>inRange(l.arriveTs,fi(wed.getTime()),null)&&fi(l.arriveTs)<=fi(new Date(wed.getTime()+6*86400000))).reduce((s,l)=>s+cost(l),0);
+  // month
+  const ms=fi(new Date(now2.getFullYear(),now2.getMonth(),1).getTime());
+  const me=fi(new Date(now2.getFullYear(),now2.getMonth()+1,0).getTime());
+  const mc=log.filter(l=>inRange(l.arriveTs,ms,me)).reduce((s,l)=>s+cost(l),0);
+  const label=useRange?(from&&to?from+' → '+to:from?'From '+from:'To '+to):'Today';
+  document.getElementById('metrics').innerHTML=`
+    <div class="metric"><div class="metric-val ca">${pr.length}</div><div class="metric-lbl">On floor now</div></div>
+    <div class="metric"><div class="metric-val cs">${new Set(tl.map(l=>l.empId)).size}</div><div class="metric-lbl">Employees today</div></div>
+    <div class="metric"><div class="metric-val cw">${usd(lc)}</div><div class="metric-lbl">Running cost now</div></div>
+    <div class="metric"><div class="metric-val" style="font-size:${useRange?'18px':'24px'}">${usd(rc)}</div><div class="metric-lbl">${label}</div></div>
+    <div class="metric"><div class="metric-val" style="font-size:20px">${usd(wc)}</div><div class="metric-lbl">This week (Wed–Tue)</div></div>
+    <div class="metric"><div class="metric-val" style="font-size:20px">${usd(mc)}</div><div class="metric-lbl">This month</div></div>`;
+  const fl=document.getElementById('floor');
+  if(!areas.length){fl.innerHTML='<div class="empty" style="grid-column:1/-1">No areas configured.</div>';return;}
+  fl.innerHTML=areas.map(a=>{
+    const here=pr.filter(p=>p.area===a.name),ac=here.reduce((s,l)=>s+cost(l),0);
+    return`<div class="fc"><div class="fah"><span>${a.name}</span><span class="badge b-area">${here.length}</span></div>
+      ${here.length?`<div style="font-size:12px;font-weight:700;color:var(--success);margin-bottom:6px">${usd(ac)} running</div>`:''}
+      ${here.length?here.map(p=>{const e=emps.find(x=>x.id===p.empId);return`<div class="fe"><div class="av" style="width:22px;height:22px;font-size:10px">${e?ini(e):'?'}</div><span>${p.name}</span><span style="font-size:11px;color:var(--text2);margin-left:auto">${ft(p.arriveTs)}</span></div>`;}).join(''):'<div style="font-size:12px;color:var(--text2);font-style:italic;padding:4px 0">Empty</div>'}
+    </div>`;
+  }).join('');
+  const rec=log.slice(0,10),recentEl=document.getElementById('recent');
+  if(!rec.length){recentEl.innerHTML='<div class="empty">No movements yet.</div>';return;}
+  recentEl.innerHTML=rec.map(l=>{const e=emps.find(x=>x.id===l.empId);return`<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px">
+    <div style="display:flex;align-items:center;gap:8px"><div class="av" style="width:24px;height:24px;font-size:10px">${e?ini(e):'?'}</div>
+      <div><div class="fw6">${l.name}</div><div style="font-size:11px;color:var(--text2)">${ft(l.arriveTs)}</div></div>
+    </div>
+    <div style="text-align:right"><span class="badge b-area">${l.area}</span>${l.manual?'<span class="badge b-manual" style="margin-left:4px;font-size:10px">manual</span>':''}
+      <div style="font-size:11px;color:var(--success);margin-top:2px">${usd(cost(l))}</div></div>
+  </div>`;}).join('');
+}
+rDB();
+setInterval(()=>{if(document.getElementById('pg-db').classList.contains('on'))rDB();if(document.getElementById('pg-cost').classList.contains('on'))rCost();},10000);
+
+/* ── LABOR COST ── */
+let actCT='live';
+function ctab(t){actCT=t;['live','hist','byemp'].forEach(id=>{document.getElementById('c-'+id).style.display=id===t?'block':'none';document.getElementById('ct-'+id).classList.toggle('on',id===t);});rCost();}
+function rCost(){
+  const today=fi(Date.now()),pr=getPresent(),tl=log.filter(l=>fi(l.arriveTs)===today);
+  const lc=pr.reduce((s,l)=>s+cost(l),0),tc=tl.reduce((s,l)=>s+cost(l),0),cc=tl.filter(l=>l.leaveTs).reduce((s,l)=>s+cost(l),0);
+  const avg=emps.length?emps.reduce((s,e)=>s+(e.rate||0),0)/emps.length:0;
+  document.getElementById('cmetrics').innerHTML=`
+    <div class="metric"><div class="metric-val cw">${usd(lc)}</div><div class="metric-lbl">Running now</div></div>
+    <div class="metric"><div class="metric-val">${usd(tc)}</div><div class="metric-lbl">Total today</div></div>
+    <div class="metric"><div class="metric-val cs">${usd(cc)}</div><div class="metric-lbl">Completed sessions</div></div>
+    <div class="metric"><div class="metric-val cm">${usd(avg)}/hr</div><div class="metric-lbl">Avg rate</div></div>`;
+  if(actCT==='live')rCL(pr);if(actCT==='hist')rCH(tl);if(actCT==='byemp')rCE(tl);
+}
+function rCL(pr){
+  const w=document.getElementById('c-live'),aa=areas.filter(a=>pr.some(p=>p.area===a.name));
+  if(!aa.length){w.innerHTML='<div class="empty">No employees on floor.</div>';return;}
+  const tot=pr.reduce((s,l)=>s+cost(l),0);
+  w.innerHTML=aa.map(a=>{
+    const here=pr.filter(p=>p.area===a.name),ac=here.reduce((s,l)=>s+cost(l),0),pct=tot>0?Math.round(ac/tot*100):0;
+    return`<div class="acc"><div class="ach">
+      <div class="acn"><i class="ti ti-building-factory-2" style="color:var(--text2)"></i>${a.name}${a.code?'<span class="chip">'+a.code+'</span>':''}<span class="badge b-live"><i class="ti ti-activity" style="font-size:10px"></i> Live</span></div>
+      <div style="text-align:right"><div class="acv">${usd(ac)}</div><div class="acs">${pct}% · ${here.length} emp</div></div>
+    </div>
+    <div class="pb"><div class="pbf" style="width:${pct}%"></div></div>
+    <div style="margin-top:10px">${here.map(l=>{const e=emps.find(x=>x.id===l.empId);return`<div class="ecr">
+      <div style="display:flex;align-items:center;gap:8px"><div class="av" style="width:26px;height:26px;font-size:10px">${e?ini(e):'?'}</div>
+        <div><div class="fw6">${l.name}</div><div style="font-size:11px;color:var(--text2)">since ${ft(l.arriveTs)} · ${dur(Date.now()-l.arriveTs)} · ${usd(e?e.rate:0)}/hr</div></div>
+      </div><div class="fw7 cs">${usd(cost(l))}</div>
+    </div>`;}).join('')}</div></div>`;
+  }).join('');
+}
+function rCH(tl){
+  const w=document.getElementById('c-hist'),comp=tl.filter(l=>l.leaveTs);
+  if(!comp.length){w.innerHTML='<div class="empty">No completed sessions today.</div>';return;}
+  const byA={};comp.forEach(l=>{if(!byA[l.area])byA[l.area]=[];byA[l.area].push(l);});
+  const tot=comp.reduce((s,l)=>s+cost(l),0);
+  w.innerHTML=Object.entries(byA).map(([an,es])=>{
+    const ac=es.reduce((s,l)=>s+cost(l),0),pct=tot>0?Math.round(ac/tot*100):0;
+    return`<div class="acc"><div class="ach">
+      <div class="acn"><i class="ti ti-building-factory-2" style="color:var(--text2)"></i>${an}<span class="badge b-out">Done</span></div>
+      <div style="text-align:right"><div class="acv" style="color:var(--text)">${usd(ac)}</div><div class="acs">${es.length} session${es.length!==1?'s':''} · ${pct}%</div></div>
+    </div>
+    <div class="pb"><div class="pbf" style="width:${pct}%;background:var(--text2)"></div></div>
+    <div style="margin-top:10px">${es.map(l=>{const e=emps.find(x=>x.id===l.empId);return`<div class="ecr">
+      <div style="display:flex;align-items:center;gap:8px"><div class="av" style="width:26px;height:26px;font-size:10px">${e?ini(e):'?'}</div>
+        <div><div class="fw6">${l.name}${l.manual?'<span class="badge b-manual" style="margin-left:6px;font-size:10px">manual</span>':''}</div>
+          <div style="font-size:11px;color:var(--text2)">${ft(l.arriveTs)} → ${ft(l.leaveTs)} · ${dur(l.leaveTs-l.arriveTs)} · ${usd(e?e.rate:0)}/hr</div></div>
+      </div><div class="fw7">${usd(cost(l))}</div>
+    </div>`;}).join('')}</div></div>`;
+  }).join('');
+}
+function rCE(tl){
+  const w=document.getElementById('c-byemp');
+  if(!tl.length){w.innerHTML='<div class="empty">No activity today.</div>';return;}
+  const byE={};tl.forEach(l=>{if(!byE[l.empId])byE[l.empId]={entries:[],total:0};const c=cost(l);byE[l.empId].entries.push({...l,cost:c});byE[l.empId].total+=c;});
+  const tot=Object.values(byE).reduce((s,v)=>s+v.total,0);
+  const sorted=Object.entries(byE).sort((a,b)=>b[1].total-a[1].total);
+  w.innerHTML=`<div class="tw"><table><thead><tr><th>Employee</th><th>ID</th><th>Sessions</th><th>Time on floor</th><th>Rate/hr</th><th style="text-align:right">Total cost</th></tr></thead><tbody>`+
+  sorted.map(([eid,data])=>{
+    const e=emps.find(x=>x.id===eid);
+    const ms=data.entries.reduce((s,l)=>s+(l.leaveTs?l.leaveTs-l.arriveTs:Date.now()-l.arriveTs),0);
+    const pct=tot>0?Math.round(data.total/tot*100):0;
+    return`<tr><td><div style="display:flex;align-items:center;gap:8px"><div class="av">${e?ini(e):'?'}</div><span class="fw6">${data.entries[0].name}</span></div></td>
+      <td><span class="chip">${eid}</span></td><td>${data.entries.length}</td><td>${dur(ms)}</td><td>${usd(e?e.rate:0)}</td>
+      <td style="text-align:right"><div class="fw6 cs">${usd(data.total)}</div><div style="font-size:11px;color:var(--text2)">${pct}%</div></td></tr>`;
+  }).join('')+'</tbody></table></div>';
+}
+
+/* ── LOG ── */
+function renderLog(){
+  const q=(document.getElementById('fs').value||'').toLowerCase(),ar=document.getElementById('fa').value,dt=document.getElementById('fd').value;
+  const fl=log.filter(l=>{if(q&&!(l.name+' '+l.empId).toLowerCase().includes(q))return false;if(ar&&l.area!==ar)return false;if(dt&&fi(l.arriveTs)!==dt)return false;return true;});
+  const tb=document.getElementById('ltb');
+  if(!fl.length){tb.innerHTML='<tr><td colspan="10"><div class="empty">No records match.</div></td></tr>';return;}
+  tb.innerHTML=fl.map((l,i)=>{
+    const e=emps.find(x=>x.id===l.empId);
+    return`<tr>
+      <td style="color:var(--text2);font-size:11px">${fl.length-i}</td>
+      <td><div style="display:flex;align-items:center;gap:6px"><div class="av" style="width:22px;height:22px;font-size:10px">${e?ini(e):'?'}</div><span class="fw6">${l.name}</span></div></td>
+      <td><span class="chip">${l.empId}</span></td>
+      <td><span class="badge b-area">${l.area}</span></td>
+      <td style="font-size:12px">${fd(l.arriveTs)} ${ft(l.arriveTs)}</td>
+      <td style="font-size:12px">${l.leaveTs?ft(l.leaveTs):'<span style="color:var(--success)">Still here</span>'}</td>
+      <td style="font-size:12px">${l.leaveTs?dur(l.leaveTs-l.arriveTs):'—'}</td>
+      <td class="fw6 cs" style="font-size:12px">${usd(cost(l))}</td>
+      <td>${l.manual?'<span class="badge b-manual"><i class="ti ti-pencil" style="font-size:9px"></i> manual</span>':'<span style="font-size:11px;color:var(--text2)">card</span>'}</td>
+      <td><div style="display:flex;gap:3px">
+        <button class="sm amber" onclick="editPunch('${l.id}')" title="Edit"><i class="ti ti-pencil"></i></button>
+        <button class="sm danger" onclick="delPunchPin('${l.id}')" title="Delete"><i class="ti ti-trash"></i></button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+function clrF(){['fs','fd'].forEach(i=>document.getElementById(i).value='');document.getElementById('fa').value='';renderLog();}
+function expCSV(){
+  const rows=log.map((l,i)=>{const e=emps.find(x=>x.id===l.empId);return{'#':log.length-i,'Emp ID':l.empId,'Name':l.name,'Area':l.area,'Arrived':fd(l.arriveTs)+' '+ft(l.arriveTs),'Left':l.leaveTs?fd(l.leaveTs)+' '+ft(l.leaveTs):'','Duration':l.leaveTs?dur(l.leaveTs-l.arriveTs):'','Rate/hr':usd(e?e.rate:0),'Cost':usd(cost(l)),'Source':l.manual?'Manual':'Card'};});
+  if(!rows.length){alert('No data.');return;}
+  const h=Object.keys(rows[0]),csv=[h.join(','),...rows.map(r=>h.map(k=>'"'+String(r[k]).replace(/"/g,'""')+'"').join(','))].join('\r\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='ProxiTrack_'+fi(Date.now())+'.csv';a.click();
+}
+
+/* ── AUDIT ── */
+function renderAudit(){
+  const q=(document.getElementById('afs').value||'').toLowerCase(),ac=document.getElementById('afa').value,dt=document.getElementById('afd').value;
+  const fl=al.filter(a=>{if(q&&!(a.empName+' '+a.reason+' '+a.editor+' '+a.notes).toLowerCase().includes(q))return false;if(ac&&a.action!==ac)return false;if(dt&&fi(a.ts)!==dt)return false;return true;});
+  const w=document.getElementById('audit-wrap');
+  if(!fl.length){w.innerHTML='<div class="empty">No audit entries yet. Manual edits appear here.</div>';return;}
+  w.innerHTML='<div class="card" style="padding:.75rem 1.25rem">'+fl.map(a=>{
+    const cls=a.action==='ADD'?'aa-add':a.action==='EDIT'?'aa-edit':'aa-del';
+    const ico=a.action==='ADD'?'ti-plus':a.action==='EDIT'?'ti-pencil':'ti-trash';
+    let chg='';
+    if(a.action==='EDIT'&&a.before&&a.after){
+      const ch=[];
+      if(a.before.area!==a.after.area)ch.push('Area: <b>'+a.before.area+'</b> → <b>'+a.after.area+'</b>');
+      if(a.before.arriveTs!==a.after.arriveTs)ch.push('Arrive: <b>'+ft(a.before.arriveTs)+'</b> → <b>'+ft(a.after.arriveTs)+'</b>');
+      if(a.before.leaveTs!==a.after.leaveTs)ch.push('Leave: <b>'+(a.before.leaveTs?ft(a.before.leaveTs):'none')+'</b> → <b>'+(a.after.leaveTs?ft(a.after.leaveTs):'none')+'</b>');
+      if(ch.length)chg='<div style="margin-top:6px;padding:6px 8px;background:var(--bg3);border-radius:6px;font-size:11px">'+ch.join(' · ')+'</div>';
+    }
+    return`<div class="arow"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+          <span class="aa ${cls}"><i class="ti ${ico}"></i> ${a.action}</span>
+          <span class="fw6">${a.empName}</span>
+          <span class="badge b-area" style="font-size:10px">${a.area}</span>
+        </div>
+        <div style="font-size:12px;color:var(--text2)">Reason: <span style="color:var(--text)">${a.reason}</span>${a.notes?' · Note: <span style="color:var(--text)">'+a.notes+'</span>':''}</div>
+        ${chg}
+      </div>
+      <div style="text-align:right;flex-shrink:0"><div class="fw6" style="font-size:12px">${a.editor}</div><div style="font-size:11px;color:var(--text2)">${fd(a.ts)} ${ft(a.ts)}</div></div>
+    </div></div>`;
+  }).join('')+'</div>';
+}
+function clrAF(){['afs','afd'].forEach(i=>document.getElementById(i).value='');document.getElementById('afa').value='';renderAudit();}
+function expAudit(){
+  const rows=al.map((a,i)=>({'#':al.length-i,'Action':a.action,'Employee':a.empName,'Emp ID':a.empId,'Area':a.area,'Reason':a.reason,'Notes':a.notes,'Edited by':a.editor,'Date':fd(a.ts),'Time':ft(a.ts)}));
+  if(!rows.length){alert('No audit records yet.');return;}
+  const h=Object.keys(rows[0]),csv=[h.join(','),...rows.map(r=>h.map(k=>'"'+String(r[k]).replace(/"/g,'""')+'"').join(','))].join('\r\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='ProxiTrack_Audit_'+fi(Date.now())+'.csv';a.click();
+}
+
+/* ── STATION ── */
+let sArea='',sAF=null,sRT=null;
+function openStn(){rSels();document.getElementById('stn').classList.add('on');document.getElementById('sasel').value='';saChange();focStn();sAF=setInterval(focStn,3000);}
+function closeStn(){document.getElementById('stn').classList.remove('on');if(sAF){clearInterval(sAF);sAF=null;}sArea='';}
+function focStn(){const i=document.getElementById('si');if(i&&document.getElementById('stn').classList.contains('on'))i.focus();}
+function saChange(){sArea=document.getElementById('sasel').value;document.getElementById('saname').textContent=sArea||'No area selected';document.getElementById('sstat').textContent=sArea?'Ready — waiting for card swipe':'Select an area to activate';rSRec();}
+document.getElementById('si').addEventListener('keydown',function(e){
+  if(e.key==='Enter'){
+    const v=this.value.trim();this.value='';if(!v)return;
+    if(!sArea){showSR(false,'No area selected.','');return;}
+    const r=swipe(v,sArea);
+    if(r.ok){showSR(true,r.emp.first+' '+r.emp.last,'<span class="chip">'+r.emp.id+'</span> &nbsp; '+r.entry.area+(r.closed?' <span style="color:var(--text2);font-size:11px">(left '+r.closed+')</span>':'')+'<br><span style="color:var(--success);font-size:12px">'+usd(r.emp.rate)+'/hr</span>');rDB();}
+    else showSR(false,r.msg,'');
+    rSRec();
+  }
+});
+function showSR(ok,title,detail){
+  const b=document.getElementById('sres');b.className='sres show '+(ok?'ok':'err');
+  document.getElementById('srname').textContent=title;document.getElementById('srdet').innerHTML=detail||'';
+  if(sRT)clearTimeout(sRT);sRT=setTimeout(()=>b.classList.remove('show'),3000);
+}
+function rSRec(){
+  const rec=log.filter(l=>l.area===sArea).slice(0,6),w=document.getElementById('srec');
+  if(!rec.length){w.innerHTML='<div style="color:var(--text2);font-size:12px">No activity yet.</div>';return;}
+  w.innerHTML=rec.map(l=>`<div class="srr"><span class="fw6" style="flex:1">${l.name}</span><span style="color:var(--text2)">${ft(l.arriveTs)}</span><span style="color:var(--success);font-size:11px">${usd(cost(l))}</span><span class="badge ${l.leaveTs?'b-out':'b-in'}" style="font-size:10px">${l.leaveTs?'Left':'Here'}</span></div>`).join('');
+}
+
+/* ── Dark mode toggle ── */
+function toggleDM(){
+  const root=document.documentElement;
+  const cur=root.getAttribute('data-theme');
+  const sys=window.matchMedia('(prefers-color-scheme:dark)').matches;
+  let next;
+  if(!cur)next=sys?'light':'dark';
+  else if(cur==='dark')next='light';
+  else next='dark';
+  root.setAttribute('data-theme',next);
+  localStorage.setItem('px_dm',next);
+  document.getElementById('dm-icon').className=next==='dark'?'ti ti-sun':'ti ti-moon';
+}
+// Set icon on load
+(function(){
+  const dm=localStorage.getItem('px_dm');
+  const sys=window.matchMedia('(prefers-color-scheme:dark)').matches;
+  const isDark=dm==='dark'||(dm===null&&sys);
+  const ic=document.getElementById('dm-icon');
+  if(ic)ic.className=isDark?'ti ti-sun':'ti ti-moon';
+})();
+
+/* ── Dashboard date range ── */
+function setDBRange(mode){
+  const now=new Date();
+  let from,to;
+  if(mode==='today'){
+    from=to=fi(Date.now());
+  } else if(mode==='week'){
+    // Wed–Tue: find last Wednesday
+    const day=now.getDay(); // 0=Sun,1=Mon,...,3=Wed
+    const diffToWed=((day-3)+7)%7;
+    const wed=new Date(now);wed.setDate(now.getDate()-diffToWed);
+    const tue=new Date(wed);tue.setDate(wed.getDate()+6);
+    from=fi(wed.getTime());to=fi(tue.getTime());
+  } else if(mode==='month'){
+    from=fi(new Date(now.getFullYear(),now.getMonth(),1).getTime());
+    to=fi(new Date(now.getFullYear(),now.getMonth()+1,0).getTime());
+  } else {
+    // clear
+    document.getElementById('db-from').value='';
+    document.getElementById('db-to').value='';
+    rDB();return;
+  }
+  document.getElementById('db-from').value=from;
+  document.getElementById('db-to').value=to;
+  // highlight active button
+  ['today','week','month'].forEach(id=>{
+    const b=document.getElementById('drb-'+id);
+    if(b){b.className=id===mode?'primary sm':'sm';}
+  });
+  rDB();
+}
+
+function getDBRange(){
+  const f=document.getElementById('db-from').value;
+  const t=document.getElementById('db-to').value;
+  return{from:f||null,to:t||null};
+}
+
+function inRange(ts,from,to){
+  const d=fi(ts);
+  if(from&&d<from)return false;
+  if(to&&d>to)return false;
+  return true;
+}
+
+/* ── Manual entry confirm step ── */
+function previewMM(){
+  const empId=document.getElementById('mm-emp').value;
+  const area=document.getElementById('mm-area').value;
+  const arrS=document.getElementById('mm-arr').value;
+  const lvS=document.getElementById('mm-lv').value;
+  const rsn=document.getElementById('mm-rsn').value;
+  const notes=document.getElementById('mm-notes').value.trim();
+  const editor=document.getElementById('mm-editor').value.trim();
+  const err=document.getElementById('mm-err');
+  if(!empId||!area||!arrS||!rsn||!editor){err.textContent='Please fill all required fields before reviewing.';return;}
+  const arrTs=new Date(arrS).getTime();
+  const lvTs=lvS?new Date(lvS).getTime():null;
+  if(isNaN(arrTs)){err.textContent='Invalid arrive time.';return;}
+  if(lvTs&&lvTs<=arrTs){err.textContent='Leave time must be after arrive time.';return;}
+  err.textContent='';
+  const emp=emps.find(e=>e.id===empId);
+  const isEdit=!!document.getElementById('mm-eid').value;
+  const body=document.getElementById('cm-body');
+  body.innerHTML=`
+    <div><span style="color:var(--text2)">Action:</span> <b>${isEdit?'Edit existing punch':'Add new punch'}</b></div>
+    <div><span style="color:var(--text2)">Employee:</span> <b>${emp?emp.first+' '+emp.last:'?'}</b> <span class="chip">${empId}</span></div>
+    <div><span style="color:var(--text2)">Area:</span> <b>${area}</b></div>
+    <div><span style="color:var(--text2)">Arrive:</span> <b>${fd(arrTs)} ${ft(arrTs)}</b></div>
+    <div><span style="color:var(--text2)">Leave:</span> <b>${lvTs?fd(lvTs)+' '+ft(lvTs):'— (still present)'}</b></div>
+    ${lvTs?'<div><span style="color:var(--text2)">Duration:</span> <b>'+dur(lvTs-arrTs)+'</b></div>':''}
+    ${lvTs&&emp?'<div><span style="color:var(--text2)">Cost:</span> <b style="color:var(--success)">'+usd((lvTs-arrTs)/3600000*emp.rate)+'</b></div>':''}
+    <div><span style="color:var(--text2)">Reason:</span> <b>${rsn}</b></div>
+    ${notes?'<div><span style="color:var(--text2)">Notes:</span> '+notes+'</div>':''}
+    <div><span style="color:var(--text2)">Edited by:</span> <b>${editor}</b></div>
+  `;
+  document.getElementById('cm').classList.add('on');
+}
+function backMM(){document.getElementById('cm').classList.remove('on');}
+
+
+/* ── Init on load ── */
+document.addEventListener('DOMContentLoaded',function(){
+  setDBRange('today');
+  // sync dark mode icon
+  const dm=localStorage.getItem('px_dm');
+  const sys=window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;
+  const isDark=dm==='dark'||(dm===null&&sys);
+  const ic=document.getElementById('dm-icon');
+  if(ic)ic.className=isDark?'ti ti-sun':'ti ti-moon';
+});
+
+</script>
+
+</body></html>
